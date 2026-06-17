@@ -6,17 +6,26 @@ spring:
     name: config-server
 
   profiles:
-    active: native
+    active: git
+  #active: native
 
   cloud:
     config:
       server:
-        native:
-          search-locations:
-            - classpath:/config
+        git:
+          uri: https://github.com/Suresh322/micro-services-lab.git
+          default-label: master
+          search-paths:
+            - config-server/src/main/resources/config
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+          #native:
+          #search-locations:
+          #-classpath:/config
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,refresh
