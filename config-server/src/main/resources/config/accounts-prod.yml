@@ -1,0 +1,11 @@
+build:
+  version: "PROD-1.0.0"
+
+account:
+  message: "Welcome to EazyBank cards related Prod APIs "
+  contactDetails:
+    name: "ASHISH DUTTA SHARMA - Prod Lead"
+    email: "ashish.dutta@eazybank.com"
+  onCallSupport:
+    - (310) 875-4367
+    - (201) 236-1267

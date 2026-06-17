@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: accounts
+
+  datasource:
+    #url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=account-service
+    url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=account-service
+    username: postgres
+    password: admin
+    hikari:
+      schema: account-service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: account-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+build:
+  version: "DEV-1.0.0"
+
+account:
+  message: "Welcome to EazyBank cards related DEV APIS"
+  contactDetails:
+    name: "Cherryl Pankaj - DEV Lead"
+    email: "cherryl@eazybank.com"
+  onCallSupport:
+    - (310) 875-4367
+    - (201) 236-1267

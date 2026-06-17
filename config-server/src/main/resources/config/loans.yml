@@ -1,0 +1,41 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: loans
+
+  datasource:
+    #url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=loans_service
+    url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=loan_service
+    username: postgres
+    password: admin
+    hikari:
+      schema: loan_service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: loan_service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+build:
+  version: "3.0"
+
+loans:
+  message: "Welcome to EazyBank loans related local APIs "
+  contactDetails:
+    name: "Amaal Grega - Developer"
+    email: "amaal@eazybank.com"
+  onCallSupport:
+    - (452) 456-2176
+    - (546) 764-8934

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: loans
+
+  profiles:
+    active: default
+
+  config:
+    import: "configserver:http://localhost:8071"
+
+  datasource:
+    #url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=loans_service
+    url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=loan_service
+    username: postgres
+    password: admin
+    hikari:
+      schema: loan_service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: loan_service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

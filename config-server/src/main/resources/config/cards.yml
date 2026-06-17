@@ -1,0 +1,42 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: cards
+
+  datasource:
+    #url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=card_service
+    url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=card_service
+    username: postgres
+    password: admin
+    hikari:
+      schema: card_service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: card_service
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+build:
+  version: "3.0"
+
+cards:
+  message: "Welcome to EazyBank cards related local APIs "
+  contactDetails:
+    name: "Dragos Lech - Developer"
+    email: "dragos@eazybank.com"
+  onCallSupport:
+    - (412) 419-3491
+    - (915) 382-1932

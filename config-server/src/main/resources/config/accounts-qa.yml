@@ -1,0 +1,11 @@
+build:
+  version: "QA-1.0.0"
+
+account:
+  message: "Welcome to EazyBank cards related QA APIs "
+  contactDetails:
+    name: "Pankaj - QA Lead"
+    email: "pankaj@eazybank.com"
+  onCallSupport:
+    - (310) 875-4367
+    - (201) 236-1267
