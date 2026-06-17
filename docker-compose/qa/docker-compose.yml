@@ -1,0 +1,89 @@
+services:
+  config-server:
+    image: "micro-services-lab/config-server:S2"
+    container_name: config-server
+    ports:
+      - "8071:8071"
+    environment:
+      # Only needed if the GitHub repo is private — use a PAT, not your GitHub password
+      SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME: "Suresh322"
+      SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD: "${GITHUB_TOKEN}"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8071/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - micro-services-lab
+
+  accounts:
+    image: "micro-services-lab/accounts:S2"
+    container_name: accounts
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_CONFIG_IMPORT: "configserver:http://config-server:8071"
+      SPRING_PROFILES_ACTIVE: "qa"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=account-service"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - micro-services-lab
+
+  loans:
+    image: "micro-services-lab/loans:S2"
+    container_name: loans
+    ports:
+      - "8090:8090"
+    restart: on-failure
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_CONFIG_IMPORT: "configserver:http://config-server:8071"
+      SPRING_PROFILES_ACTIVE: "qa"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=loan_service"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - micro-services-lab
+
+  cards:
+    image: "micro-services-lab/cards:S2"
+    container_name: cards
+    ports:
+      - "9000:9000"
+    restart: on-failure
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_CONFIG_IMPORT: "configserver:http://config-server:8071"
+      SPRING_PROFILES_ACTIVE: "qa"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=card_service"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - micro-services-lab
+
+networks:
+  micro-services-lab:
+    driver: bridge
