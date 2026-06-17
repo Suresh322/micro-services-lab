@@ -6,8 +6,8 @@ spring:
     name: loans
 
   datasource:
-    #url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=loans_service
-    url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=loan_service
+    url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=loan_service
+    #url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=loan_service
     username: postgres
     password: admin
     hikari:

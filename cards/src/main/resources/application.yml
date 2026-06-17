@@ -2,8 +2,5 @@ spring:
   application:
     name: cards
 
-  profiles:
-    active: default
-
   config:
-    import: "configserver:http://localhost:8071"
+    import: ${SPRING_CONFIG_IMPORT:configserver:http://localhost:8071}
