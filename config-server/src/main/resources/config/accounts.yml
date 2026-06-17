@@ -6,8 +6,8 @@ spring:
     name: accounts
 
   datasource:
-    #url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=account-service
-    url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=account-service
+    url: jdbc:postgresql://host.docker.internal:5432/micro-lab?currentSchema=account-service
+    #url: jdbc:postgresql://localhost:5432/micro-lab?currentSchema=account-service
     username: postgres
     password: admin
     hikari:

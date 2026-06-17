@@ -14,10 +14,9 @@ spring:
       server:
         git:
           uri: https://github.com/Suresh322/micro-services-lab.git
-          default-label: master
+          default-label: main
           search-paths:
             - config-server/src/main/resources/config
-          timeout: 5
           clone-on-start: true
           force-pull: true
           #native:
