@@ -4,8 +4,10 @@ import com.microlab.account_service.dto.AccountsContactInfoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients
 @EnableConfigurationProperties(value = {AccountsContactInfoDto.class})
 public class AccountServiceApplication {
 
